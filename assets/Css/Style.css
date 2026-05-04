@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* ===== Lado Esquerdo ===== */
+.layout__left {
+    width: 50%;
+}
+
+.layout__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== Lado direito ===== */
+.layout__right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF8BC7;
+}
+
+/* ===== Card ===== */
+.auth-card {
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 12px;
+    background: #FFDFFD;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Textos ===== */
+.auth-card__title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #844566;
+}
+
+.auth-card__subtitle {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: normal;
+    color: #844566;
+}
+
+/* ===== Botões ===== */
+.auth-card__button {
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+    color: #fff;
+    background-color: #E580B5;
+}
+
+.auth-card__button:hover {
+    background-color: #A85A83;
+}
