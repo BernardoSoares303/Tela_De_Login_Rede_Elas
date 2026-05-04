@@ -65,3 +65,42 @@ body {
 .auth-card__button:hover {
     background-color: #A85A83;
 }
+
+.auth-card__button:active {
+    background-color: #ff7ec1 !important;
+}
+
+
+/* ===== Tablets ===== */
+@media (max-width: 991px) {
+    .layout {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .layout__left {
+        display: none;
+    }
+
+    .layout__right {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
+
+/* ===== Celulares ===== */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 20px;
+    }
+
+    .auth-card__title {
+        font-size: 1.4rem;
+    }
+
+    .auth-card__subtitle {
+        font-size: 1rem;
+    }
+}
+
