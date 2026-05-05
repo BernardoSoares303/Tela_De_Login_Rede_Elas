@@ -11,37 +11,30 @@
 
 <body>
 
-<div class="layout">
+    <div class="container-fluid p-0">
+        <div class="row g-0 min-vh-100">
 
-    <!-- Lado esquerdo -->
-    <div class="layout__left">
-        <img src="assets/img/lateral.png" class="layout__image" alt="Imagem">
-    </div>
+            <!-- Lado esquerdo -->
+            <div class="col-md-6 d-none d-md-block">
+                <img src="assets/img/lateral.png" class="layout__image" alt="">
+            </div>
 
-    <!-- Lado direito -->
-    <div class="layout__right">
-        <div class="auth-card">
+            <!-- Lado direito -->
+            <div class="col-12 col-md-6 d-flex justify-content-center align-items-center layout__right">
 
-            <h3 class="auth-card__title">
-                Seja Bem-vinda(o) ao Rede Elas!
-            </h3>
+                <div class="card auth-card text-center">
+                    <h3 class="auth-card__title">Seja Bem-vinda(o) ao Rede Elas!</h3>
+                    <p class="auth-card__subtitle">Você deseja:</p>
 
-            <h4 class="auth-card__subtitle">
-                Você deseja:
-            </h4>
+                    <button class="btn auth-card__button">Fazer Login</button>
+                    <button class="btn auth-card__button">Criar Conta</button>
+                </div>
 
-            <button class="btn btn-primary auth-card__button">
-                Fazer Login
-            </button>
-
-            <button class="btn btn-outline-primary auth-card__button">
-                Criar Conta
-            </button>
+            </div>
 
         </div>
     </div>
 
-</div>
-
 </body>
+
 </html>
