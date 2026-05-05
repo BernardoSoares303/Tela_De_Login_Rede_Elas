@@ -20,7 +20,7 @@ body {
     width: 90%;
     max-width: 400px;
     padding: 25px;
-    border-radius: 12px;
+    border-radius: 48px;
     background: #FFDFFD;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -47,4 +47,9 @@ body {
 
 .auth-card__button:hover {
     background-color: #A85A83;
+}
+
+.auth-card__button:active {
+    background-color: #ffb8dd !important;
+    color: #A85A83;
 }
