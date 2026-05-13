@@ -3,7 +3,7 @@ function IrTelaCadastro() {
 }
 
 function IrTelaLogin() {
-    window.alert("Tela de Login ainda Não Implementada");
+    window.location.href = "login.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
