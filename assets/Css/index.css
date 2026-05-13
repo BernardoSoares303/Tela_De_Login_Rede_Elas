@@ -29,11 +29,13 @@ body {
 .auth-card__title {
     color: #844566;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .auth-card__subtitle {
     color: #844566;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 /* botão */
