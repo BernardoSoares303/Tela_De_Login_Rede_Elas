@@ -17,7 +17,7 @@ body {
 
 /* card */
 .auth-card {
-    width: 100%;
+    width: 90%;
     max-width: 400px;
     padding: 25px;
     border-radius: 35px;
@@ -53,6 +53,7 @@ body {
     background-color: #ffb8dd !important;
 }
 
+/* Form De Cadastro */
 .Cadastro-Usuario {
     display: flex;
     flex-direction: column;
@@ -60,7 +61,7 @@ body {
 }
 
 .Cadastro-Usuario label {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 4px;
     color: #844566;
