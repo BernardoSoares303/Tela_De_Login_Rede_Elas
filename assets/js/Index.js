@@ -2,11 +2,18 @@ function IrTelaCadastro() {
     window.location.href = "cadastro.html";
 }
 
-
+function IrTelaLogin() {
+    window.alert("Tela de Login ainda Não Implementada");
+}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const botao = document.querySelector("#CriarConta");
-    botao.addEventListener("click", (e) => {
+    const cadastro = document.querySelector("#CriarConta");
+    cadastro.addEventListener("click", (e) => {
         IrTelaCadastro();
+    })
+
+    const login = document.querySelector("#Login");
+    login.addEventListener("click", (e) => {
+        IrTelaLogin();
     })
 })
