@@ -17,10 +17,10 @@ body {
 
 /* card */
 .auth-card {
-    width: 90%;
+    width: 100%;
     max-width: 400px;
     padding: 25px;
-    border-radius: 48px;
+    border-radius: 35px;
     background: #FFDFFD;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -51,5 +51,26 @@ body {
 
 .auth-card__button:active {
     background-color: #ffb8dd !important;
-    color: #A85A83;
+}
+
+.Cadastro-Usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+}
+
+.Cadastro-Usuario label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #844566;
+    display: block;
+    text-align: left;
+}
+
+.Cadastro-Usuario input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
