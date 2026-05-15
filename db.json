@@ -4,7 +4,7 @@
       "nome": "Maria Silva",
       "email": "maria@email.com",
       "cpf": "12345678900",
-      "senha": "123456",
+      "senha": "A123456",
       "nivel": "usuario",
       "dataCriacao": "2026-04-17",
       "id": "rpmpB6eEAeQ"
@@ -13,10 +13,37 @@
       "nome": "Bernardo Soares",
       "cpf": "703.137.246-10",
       "email": "bernardosoares701@gmail.com",
-      "senha": "123",
+      "senha": "123a",
       "nivel": "usuario",
       "dataCriacao": "2026-05-15",
       "id": "wzunLc0UyS4"
+    },
+    {
+      "nome": "Lucas Rangel",
+      "cpf": "462.664.370-15",
+      "email": "rangel@gmail.com",
+      "senha": "Roblox21112",
+      "nivel": "usuario",
+      "dataCriacao": "2026-05-15",
+      "id": "KuU70CNEQbc"
+    },
+    {
+      "nome": "Marcelo Henrique",
+      "cpf": "536.107.260-59",
+      "email": "MLREIDOCAPA@gmail.com",
+      "senha": "shartovpelado",
+      "nivel": "usuario",
+      "dataCriacao": "2026-05-15",
+      "id": "x4HF5eef3vs"
+    },
+    {
+      "nome": "Caio Gomes",
+      "cpf": "703.137.246-10",
+      "email": "bbnado34@gmail.com",
+      "senha": "A1111",
+      "nivel": "usuario",
+      "dataCriacao": "2026-05-15",
+      "id": "Md1wu6n2RvA"
     }
   ],
   "comunidades": [

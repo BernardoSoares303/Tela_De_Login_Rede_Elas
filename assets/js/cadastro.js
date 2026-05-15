@@ -1,31 +1,49 @@
-const form = document.querySelector(".Cadastro-Usuario");
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".Cadastro-Usuario");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault(); // impede recarregar a página
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-  const usuario = {
-    nome: document.getElementById("name").value,
-    cpf: document.getElementById("cpf").value,
-    email: document.getElementById("email").value,
-    senha: document.getElementById("password").value,
-    nivel: "usuario",
-    dataCriacao: new Date().toISOString().split("T")[0]
-  };
+        try {
+            const senha = document.getElementById("password").value;
 
-  await cadastrarUsuario(usuario);
+            // Tem que validar se a senha tem letra pq o json server é bugado e nao sabe tratar string != int
+            if (!validarSenha(senha)) {
+                alert("A senha deve conter pelo menos uma letra!");
+                return; // impede o cadastro
+            }
+
+            const usuario = {
+                nome: document.getElementById("name").value,
+                cpf: document.getElementById("cpf").value,
+                email: document.getElementById("email").value,
+                senha: senha,
+                nivel: "usuario",
+                dataCriacao: new Date().toISOString().split("T")[0]
+            };
+
+            await cadastrarUsuario(usuario);
+
+            window.location.href = "login.html";
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro ao cadastrar");
+        }
+    });
 });
 
+// Função de validação
+function validarSenha(senha) {
+    return /[a-zA-Z]/.test(senha);
+}
+
 async function cadastrarUsuario(usuario) {
-  const res = await fetch("http://localhost:3000/usuarios", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(usuario)
-  });
-
-  const dados = await res.json();
-
-  alert("Usuário cadastrado com sucesso!");
-  console.log(dados);
+    const resposta = await fetch("http://localhost:3000/usuarios", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(usuario)
+    });
 }
