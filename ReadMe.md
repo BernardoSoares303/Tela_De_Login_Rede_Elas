@@ -1,10 +1,10 @@
-# 📦 Instalação do json-server
+#  Instalação do json-server
 
 Este projeto utiliza o **json-server** para simular uma API REST local.
 
 ---
 
-## 📌 Pré-requisitos
+##  Pré-requisitos
 
 Antes de instalar, você precisa ter:
 
@@ -13,9 +13,14 @@ Antes de instalar, você precisa ter:
 
 ---
 
-## ⚙️ Instalando o json-server
-
-### 🔹 Instalação global (recomendado)
+##  Instalando o json-server
 
 ```bash
-npm install -g json-server
+npm install json-server
+```
+
+## Rodar Servidor
+
+```bash
+json-server --watch db.json --port 3000
+```
