@@ -22,5 +22,5 @@ npm install json-server
 ## Rodar Servidor
 
 ```bash
-json-server --watch db.json --port 3000
+npx json-server --watch db.json --port 3000
 ```
