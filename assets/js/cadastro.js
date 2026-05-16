@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector(".Cadastro-Usuario");
 
+    // Listener para o envio do formulário
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -38,6 +39,7 @@ function validarSenha(senha) {
     return /[a-zA-Z]/.test(senha);
 }
 
+// Função para cadastrar usuário
 async function cadastrarUsuario(usuario) {
     const resposta = await fetch("http://localhost:3000/usuarios", {
         method: "POST",

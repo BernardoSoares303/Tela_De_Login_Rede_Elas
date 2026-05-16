@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Listener para o envio do formulário
     document.querySelector(".Login-Usuario").addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -9,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 });
 
+// funcão de login
 async function login(email,password) {
     try {
       const resposta = await fetch(`http://localhost:3000/usuarios?email=${email}&senha=${password}`);
@@ -19,6 +21,8 @@ async function login(email,password) {
         alert("Login bem-sucedido!");
 
         localStorage.setItem("usuarioLogado", JSON.stringify(dados[0]));
+
+        window.location.href = "home.html";
 
       } else {
         alert("Email ou senha incorretos.");
