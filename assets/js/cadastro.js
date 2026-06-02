@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             await cadastrarUsuario(usuario);
 
-            window.location.href = "login.html";
+            window.location.href = "home.html";
 
         } catch (erro) {
             console.error(erro);
