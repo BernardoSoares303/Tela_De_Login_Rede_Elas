@@ -8,6 +8,16 @@
       "nivel": "admin",
       "dataCriacao": "2026-05-15",
       "id": "W0Ho0AM2ZRw"
+    },
+    {
+      "nome": "Andre",
+      "cpf": "808.290.220-58",
+      "email": "bbnado34@gmail.com",
+      "senha": "senha123",
+      "nivel": "usuario",
+      "dataCriacao": "2026-06-03",
+      "id": "bLvJrFOGQ_I"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
