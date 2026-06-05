@@ -362,6 +362,155 @@ body {
     text-align: center;
 }
 
+/* ===========================
+   MODAL DENÚNCIA
+=========================== */
+
+.report-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+/* CONTEÚDO */
+
+.report-modal__content {
+    width: 100%;
+    max-width: 1050px;
+
+    background-color: #F2D7EE;
+
+    border-radius: 45px;
+
+    padding: 35px;
+}
+
+/* HEADER */
+
+.report-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.report-modal__title {
+    color: #A85A83;
+
+    font-size: 4rem;
+    font-weight: bold;
+
+    margin: 0;
+}
+
+/* BOTÃO FECHAR */
+
+.report-modal__close {
+    border: none;
+    background: transparent;
+
+    color: #A85A83;
+
+    font-size: 3rem;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.report-modal__close:hover {
+    transform: scale(1.1);
+
+    color: #844566;
+}
+
+/* BODY */
+
+.report-modal__body {
+    margin-bottom: 25px;
+}
+
+/* TEXTAREA */
+
+.report-modal__textarea {
+    width: 100%;
+    height: 330px;
+
+    resize: none;
+
+    border: none;
+    outline: none;
+
+    border-radius: 40px;
+
+    background-color: #ECECEC;
+
+    padding: 30px;
+
+    color: #A85A83;
+
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.report-modal__textarea::placeholder {
+    color: #B57FA1;
+}
+
+/* FOOTER */
+
+.report-modal__footer {
+    display: flex;
+    justify-content: center;
+}
+
+/* BOTÃO */
+
+.report-modal__button {
+    border: none;
+
+    background-color: #A85A83;
+    color: white;
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    padding: 15px 60px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.report-modal__button:hover {
+    background-color: #844566;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 18px rgba(132, 69, 102, 0.35);
+}
+
+.report-modal__button:active {
+    transform: scale(0.96);
+}
+
+.report-modal {
+    display: none;
+}
+
 /* Responsividade */
 
 /* Tablets */
@@ -391,6 +540,22 @@ body {
 
     .community-card {
         margin-top: 25px;
+    }
+
+    /* Modal de denúncia */
+
+    .report-modal__content {
+        border-radius: 35px;
+        padding: 25px;
+    }
+
+    .report-modal__title {
+        font-size: 3rem;
+    }
+
+    .report-modal__textarea {
+        height: 260px;
+        font-size: 1.4rem;
     }
 }
 
@@ -489,6 +654,48 @@ body {
     .community-card__title {
         text-align: center;
     }
+
+    /* Modal de denúncia */
+
+    .report-modal {
+        padding: 15px;
+    }
+
+    .report-modal__content {
+        padding: 20px;
+        border-radius: 25px;
+    }
+
+    .report-modal__header {
+        margin-bottom: 20px;
+    }
+
+    .report-modal__title {
+        font-size: 2.2rem;
+    }
+
+    .report-modal__close {
+        font-size: 2rem;
+    }
+
+    .report-modal__textarea {
+        height: 200px;
+
+        padding: 20px;
+
+        border-radius: 25px;
+
+        font-size: 1rem;
+    }
+
+    .report-modal__button {
+        width: 100%;
+
+        font-size: 1.2rem;
+
+        padding: 14px;
+    }
+
 }
 
 /* Celulares muito pequenos */
