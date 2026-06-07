@@ -57,20 +57,20 @@ function fecharModalDenuncia() {
     modal.style.display = "none";
 }
 
+
+// Função para criar denúncia
 function criarDenuncia() {
 
     // pega textarea do modal
 
-    const textarea = document.querySelector(
-        ".report-modal__textarea"
-    );
+    const textarea = document.querySelector(".report-modal__textarea");
 
     // pega motivo digitado
     const motivo = textarea.value;
 
     // valida campo vazio
     if (!motivo.trim()) {
-        alert("Digite o motivo da denúncia");
+        window.alert("Digite o motivo da denúncia");
         return;
     }
 

@@ -1,0 +1,121 @@
+/* RESET BASE */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffb4d7a6; /* fundo mais suave que bg-light */
+}
+
+/* TÍTULO */
+h1 {
+    color: #844566;
+    font-weight: bold;
+}
+
+/* LISTA */
+#lista {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ITEM DA LISTA (gerado pelo JS) */
+.list-group-item {
+    border-radius: 20px !important;
+    margin-bottom: 12px;
+    border: none !important;
+    background: #FFDFFD;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    padding: 15px 20px;
+}
+
+/* HOVER */
+.list-group-item:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* TEXTO DO USUÁRIO */
+.list-group-item h5 {
+    color: #844566;
+    margin: 0;
+    font-weight: bold;
+}
+
+.list-group-item small {
+    color: #844566;
+    opacity: 0.8;
+}
+
+/* BOTÕES */
+.btn-warning {
+    background-color: #E580B5 !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 10px;
+}
+
+.btn-warning:hover {
+    background-color: #A85A83 !important;
+}
+
+.btn-danger {
+    background-color: #ff6fa5 !important;
+    border: none !important;
+    border-radius: 10px;
+}
+
+.btn-danger:hover {
+    background-color: #d94c85 !important;
+}
+
+/* MODAL */
+.modal-content {
+    border-radius: 25px;
+    background: #FFDFFD;
+    border: none;
+}
+
+/* HEADER MODAL */
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    color: #844566;
+    font-weight: bold;
+}
+
+/* FORM */
+.modal-body label {
+    color: #844566;
+    font-weight: 600;
+}
+
+.modal-body input,
+.modal-body select {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+/* BOTÕES MODAL */
+.modal-footer {
+    border-top: none;
+}
+
+.modal-footer .btn-primary {
+    background-color: #E580B5;
+    border: none;
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #A85A83;
+}
+
+.modal-footer .btn-secondary {
+    border-radius: 10px;
+}
+
+/* ANIMAÇÃO SUAVE NO MODAL */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+}
