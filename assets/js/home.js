@@ -1,24 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+    
+    const usuario = JSON.parse(
+        localStorage.getItem("usuarioLogado")
+    );
 
+    // Carregamento do Botão de Painel do Admin
     if (usuario?.nivel == "admin") {
         document.getElementById("Painel__adm").style.display = "block";
     }
 
+    // LOGOUT
     const logoutBtn = document.getElementById("Logout");
-    logoutBtn.addEventListener("click", (e) => {
+    logoutBtn.addEventListener("click", () => {
         logout();
-    })
+    });
 
-    const denunciarBtn = document.querySelector(".relato-card__report");
-    denunciarBtn.addEventListener("click", (e) => {
-        abrirModalDenuncia();
-    })
+    // Abrir modal de denúncia
+    const denunciarBtns = document.querySelectorAll(".relato-card__report");
+    denunciarBtns.forEach((botao) => {
+        botao.addEventListener("click", () => {
+            abrirModalDenuncia();
+        });
+    });
 
+    // FECHAR MODAL
     const fecharDenunciaBtn = document.querySelector(".report-modal__close");
-    fecharDenunciaBtn.addEventListener("click", (e) => {
+    fecharDenunciaBtn.addEventListener("click", () => {
         fecharModalDenuncia();
-    })
+    });
 });
 
 function logout() {
