@@ -10,8 +10,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Carregamento do Botão de Painel do Admin
     if (usuario?.nivel == "admin") {
-        document.getElementById("Painel__adm").style.display = "block";
+        document.getElementById("adminMenu").style.display = "block";
     }
+
+    // Dropdown do Painel do Admin
+
+    const painelBtn = document.getElementById("Painel__adm");
+    const dropdown = document.getElementById("adminDropdown");
+
+    painelBtn?.addEventListener("click", () => {
+
+        dropdown.classList.toggle("ativo");
+
+    });
+
+    document.getElementById("btnUsuarios")
+        .addEventListener("click", () => {
+            window.location.href = "controle_usuarios.html";
+        });
+
+    document.getElementById("btnDenuncias")
+        .addEventListener("click", () => {
+            window.location.href = "controle_denuncias.html";
+        });
 
     // LOGOUT
     const logoutBtn = document.getElementById("Logout");

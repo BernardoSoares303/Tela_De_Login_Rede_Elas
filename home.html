@@ -47,9 +47,26 @@
                     Ajuda & Denúncia
                 </button>
 
-                <button class="mural-header__button" id="Painel__adm" style="display: none;">
-                    Painel Adm
-                </button>
+                <div class="admin-menu" id="adminMenu" style="display: none;">
+
+                    <button class="mural-header__button" id="Painel__adm">
+                        Painel Admin
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <div class="admin-menu__dropdown" id="adminDropdown">
+
+                        <button class="admin-menu__item" id="btnUsuarios">
+                            Controle de Usuários
+                        </button>
+
+                        <button class="admin-menu__item" id="btnDenuncias">
+                            Controle de Denúncias
+                        </button>
+
+                    </div>
+
+                </div>
 
             </nav>
 
@@ -144,7 +161,8 @@
                         </div>
 
                         <p class="relato-card__text">
-                            Ontem meu chefe me assediou no trabalho, ele me chamou para uma reunião e fez comentários inapropriados sobre minha aparência. Me senti muito desconfortável e não sei o que fazer.
+                            Ontem meu chefe me assediou no trabalho, ele me chamou para uma reunião e fez comentários
+                            inapropriados sobre minha aparência. Me senti muito desconfortável e não sei o que fazer.
                         </p>
 
                         <div class="relato-card__actions">
