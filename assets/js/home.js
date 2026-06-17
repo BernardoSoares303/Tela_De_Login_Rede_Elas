@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "controle_denuncias.html";
         });
 
+    document.getElementById("btnDoacoes")
+        .addEventListener("click", () => {
+            window.location.href = "doacoes.html";
+        });
+
     // LOGOUT
     const logoutBtn = document.getElementById("Logout");
     logoutBtn.addEventListener("click", () => {

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doação Simulada via PIX</title>
+  <link rel="stylesheet" href="assets/Css/doacoes.css">
+</head>
+
+<body>
+  <header class="mural-header">
+
+    <div class="mural-header__logo">
+
+      <div class="mural-header__logo-image"></div>
+
+      <h1 class="mural-header__logo-title">
+        Rede Elas
+      </h1>
+
+    </div>
+
+    <nav class="mural-header__nav">
+
+      <button class="mural-header__button" id="btnInicio">
+        Início
+      </button>
+
+      <button class="mural-header__button" id="btnMural">
+        Mural
+      </button>
+
+      <button class="mural-header__button" id="btnAjuda">
+        Ajuda & Denúncia
+      </button>
+
+      <button class="mural-header__button mural-header__button--active" id="btnDoacoes">
+        Doações
+      </button>
+
+    </nav>
+
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Apoie o Projeto</h1>
+      <p class="subtitulo">
+        Sua contribuição simbólica ajuda a fortalecer ações de acolhimento e apoio às mulheres.
+      </p>
+
+      <section class="painel-acesso">
+        <div class="status-acesso">
+          <p class="rotulo-perfil">Perfil atual</p>
+          <strong id="perfilAtual">Usuário comum</strong>
+          <p id="infoPermissao">Somente administradores podem editar e excluir doações registradas.</p>
+        </div>
+
+        <div class="acoes-acesso">
+          <button type="button" id="btnEntrarUsuario" class="btn-modo ativo-modo">Modo usuário</button>
+          <button type="button" id="btnEntrarAdmin" class="btn-modo">Modo admin</button>
+        </div>
+      </section>
+
+      <div class="area-doacao">
+        <form id="formDoacao" class="formulario">
+          <input type="hidden" id="doacaoId">
+
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Digite seu nome">
+
+          <label for="valor">Valor da doação</label>
+          <input type="number" id="valor" placeholder="R$ 0,00" min="1" step="0.01">
+
+          <label for="mensagem">Mensagem de apoio</label>
+          <textarea id="mensagem" placeholder="Escreva sua mensagem de apoio..."></textarea>
+
+          <div class="checkbox-area">
+            <input type="checkbox" id="anonimo">
+            <label for="anonimo">Doar anonimamente</label>
+          </div>
+
+          <button type="submit" id="btnSalvar">Registrar doação</button>
+          <button type="button" id="btnCancelar" class="btn-cancelar">Cancelar edição</button>
+        </form>
+
+        <aside class="pix-card">
+          <h2>PIX Simulado</h2>
+          <img src="assets/img/pix-qr.png" alt="QR Code ilustrativo de PIX" class="pix-imagem">
+          <p><strong>Chave PIX fictícia:</strong></p>
+          <p class="chave-pix">apoio@redeelas.com</p>
+          <p class="aviso">QR Code ilustrativo apenas para simulação acadêmica.</p>
+        </aside>
+      </div>
+
+      <section class="resumo">
+        <div>
+          <span id="totalDoacoes">0</span>
+          <p>doações registradas</p>
+        </div>
+        <div>
+          <span id="valorTotal">R$ 0,00</span>
+          <p>valor simbólico total</p>
+        </div>
+      </section>
+
+      <h2>Doações registradas</h2>
+      <div id="listaDoacoes" class="lista-doacoes"></div>
+    </section>
+  </main>
+
+  <script src="assets/js/doacoes.js"></script>
+</body>
+
+</html>
