@@ -39,6 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "doacoes.html";
         });
 
+        
+    document.getElementById("btnMural")
+        .addEventListener("click", () => {
+            window.location.href = "mural.html";
+        });
+        
     // LOGOUT
     const logoutBtn = document.getElementById("Logout");
     logoutBtn.addEventListener("click", () => {

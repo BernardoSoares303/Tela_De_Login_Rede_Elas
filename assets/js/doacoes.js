@@ -1,342 +1,454 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.getElementById("btnInicio")
-        .addEventListener("click", () => {
-            window.location.href = "home.html";
-        });
-
-});
-
-
 const STORAGE_KEY = "doacoesPix";
 const USUARIO_STORAGE_KEY = "usuarioLogado";
 
 const doacoesIniciais = [
-  {
-    id: "1",
-    nome: "Anônimo",
-    valor: 20,
-    mensagem: "Apoio essa causa.",
-    anonimo: true,
-    formaPagamento: "PIX Simulado",
-    data: "2026-05-17",
-    status: "Registrada"
-  },
-  {
-    id: "2",
-    nome: "Roberto",
-    valor: 10,
-    mensagem: "Toda ajuda importa.",
-    anonimo: false,
-    formaPagamento: "PIX Simulado",
-    data: "2026-05-17",
-    status: "Registrada"
-  },
-  {
-    id: "3",
-    nome: "Maria Clara",
-    valor: 30,
-    mensagem: "Juntas somos mais fortes!",
-    anonimo: false,
-    formaPagamento: "PIX Simulado",
-    data: "2026-05-17",
-    status: "Registrada"
-  }
+    {
+        id: "1",
+        nome: "Anônimo",
+        valor: 20,
+        mensagem: "Apoio essa causa.",
+        anonimo: true,
+        formaPagamento: "PIX Simulado",
+        data: "2026-05-17",
+        status: "Registrada"
+    },
+    {
+        id: "2",
+        nome: "Roberto",
+        valor: 10,
+        mensagem: "Toda ajuda importa.",
+        anonimo: false,
+        formaPagamento: "PIX Simulado",
+        data: "2026-05-17",
+        status: "Registrada"
+    }
 ];
 
-const formDoacao = document.getElementById("formDoacao");
-const doacaoId = document.getElementById("doacaoId");
-const nomeInput = document.getElementById("nome");
-const valorInput = document.getElementById("valor");
-const mensagemInput = document.getElementById("mensagem");
-const anonimoInput = document.getElementById("anonimo");
-const listaDoacoes = document.getElementById("listaDoacoes");
-const btnSalvar = document.getElementById("btnSalvar");
-const btnCancelar = document.getElementById("btnCancelar");
-const totalDoacoes = document.getElementById("totalDoacoes");
-const valorTotal = document.getElementById("valorTotal");
-const perfilAtual = document.getElementById("perfilAtual");
-const infoPermissao = document.getElementById("infoPermissao");
-const btnEntrarUsuario = document.getElementById("btnEntrarUsuario");
-const btnEntrarAdmin = document.getElementById("btnEntrarAdmin");
+let formDoacao;
+let doacaoId;
+let nomeInput;
+let valorInput;
+let mensagemInput;
+let anonimoInput;
+let listaDoacoes;
+let btnSalvar;
+let btnCancelar;
+let totalDoacoes;
+let valorTotal;
 
 function iniciarLocalStorage() {
-  const doacoes = localStorage.getItem(STORAGE_KEY);
 
-  if (!doacoes) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(doacoesIniciais));
-  }
+    if (!localStorage.getItem(STORAGE_KEY)) {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(doacoesIniciais)
+        );
+    }
 }
 
 function iniciarUsuarioPadrao() {
-  const usuarioSalvo = localStorage.getItem(USUARIO_STORAGE_KEY);
 
-  if (!usuarioSalvo) {
-    definirUsuarioAtual({ nome: "Visitante", nivel: "usuario" });
-  }
+    if (!localStorage.getItem(USUARIO_STORAGE_KEY)) {
+
+        localStorage.setItem(
+            USUARIO_STORAGE_KEY,
+            JSON.stringify({
+                nome: "Visitante",
+                nivel: "usuario"
+            })
+        );
+    }
 }
 
 function buscarUsuarioAtual() {
-  return JSON.parse(localStorage.getItem(USUARIO_STORAGE_KEY)) || { nome: "Visitante", nivel: "usuario" };
-}
 
-function definirUsuarioAtual(usuario) {
-  localStorage.setItem(USUARIO_STORAGE_KEY, JSON.stringify(usuario));
+    return JSON.parse(
+        localStorage.getItem(USUARIO_STORAGE_KEY)
+    );
 }
 
 function usuarioEhAdmin() {
-  const usuario = buscarUsuarioAtual();
-  return usuario && usuario.nivel === "admin";
-}
 
-function atualizarPainelAcesso() {
-  const usuario = buscarUsuarioAtual();
-  const admin = usuarioEhAdmin();
-
-  perfilAtual.textContent = admin ? `${usuario.nome} (Administrador)` : `${usuario.nome} (Usuário comum)`;
-  infoPermissao.textContent = admin
-    ? "Como administrador, você pode editar e excluir doações registradas."
-    : "Somente administradores podem editar e excluir doações registradas.";
-
-  btnEntrarUsuario.classList.toggle("ativo-modo", !admin);
-  btnEntrarAdmin.classList.toggle("ativo-modo", admin);
+    return buscarUsuarioAtual().nivel === "admin";
 }
 
 function buscarDoacoes() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    return JSON.parse(
+        localStorage.getItem(STORAGE_KEY)
+    ) || [];
 }
 
 function salvarDoacoes(doacoes) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(doacoes));
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(doacoes)
+    );
 }
 
 function gerarId(doacoes) {
-  if (doacoes.length === 0) {
-    return "1";
-  }
 
-  const maiorId = doacoes.reduce((maior, doacao) => {
-    const idAtual = Number(doacao.id);
-    return idAtual > maior ? idAtual : maior;
-  }, 0);
+    if (doacoes.length === 0) {
 
-  return String(maiorId + 1);
-}
-
-function listarDoacoes() {
-  const doacoes = buscarDoacoes();
-  listaDoacoes.innerHTML = "";
-
-  atualizarResumo(doacoes);
-  atualizarPainelAcesso();
-
-  if (doacoes.length === 0) {
-    listaDoacoes.innerHTML = `<p class="mensagem-vazia">Nenhuma doação registrada ainda.</p>`;
-    return;
-  }
-
-  doacoes.forEach((doacao) => {
-    const div = document.createElement("div");
-    div.classList.add("doacao");
-
-    const acoesAdmin = usuarioEhAdmin()
-      ? `
-        <div class="acoes">
-          <button onclick="editarDoacao('${doacao.id}')">Editar</button>
-          <button class="btn-excluir" onclick="excluirDoacao('${doacao.id}')">Excluir</button>
-        </div>
-      `
-      : `<p class="permissao-admin">Edição e exclusão liberadas apenas para administradores.</p>`;
-
-    div.innerHTML = `
-      <div class="doacao-topo">
-        <span class="doacao-nome">${doacao.anonimo ? "Anônimo" : doacao.nome}</span>
-        <span class="doacao-valor">${formatarMoeda(doacao.valor)}</span>
-      </div>
-      <p>${doacao.mensagem}</p>
-      <p class="doacao-data">${doacao.formaPagamento} • ${formatarData(doacao.data)} • ${doacao.status}</p>
-      ${acoesAdmin}
-    `;
-
-    listaDoacoes.appendChild(div);
-  });
-}
-
-function atualizarResumo(doacoes) {
-  totalDoacoes.textContent = doacoes.length;
-
-  const soma = doacoes.reduce((total, doacao) => {
-    return total + Number(doacao.valor);
-  }, 0);
-
-  valorTotal.textContent = formatarMoeda(soma);
-}
-
-function cadastrarDoacao(event) {
-  event.preventDefault();
-
-  const nome = nomeInput.value.trim();
-  const valor = Number(valorInput.value);
-  const mensagem = mensagemInput.value.trim();
-  const anonimo = anonimoInput.checked;
-
-  if (!anonimo && nome === "") {
-    alert("Digite seu nome ou marque a opção para doar anonimamente.");
-    return;
-  }
-
-  if (!valor || valor <= 0) {
-    alert("Digite um valor válido para a doação.");
-    return;
-  }
-
-  if (mensagem === "") {
-    alert("Digite uma mensagem de apoio.");
-    return;
-  }
-
-  const doacoes = buscarDoacoes();
-
-  if (doacaoId.value) {
-    if (!usuarioEhAdmin()) {
-      alert("Somente administradores podem editar doações.");
-      limparFormulario();
-      return;
+        return "1";
     }
 
-    const doacoesAtualizadas = doacoes.map((doacao) => {
-      if (doacao.id === doacaoId.value) {
-        return {
-          ...doacao,
-          nome: anonimo ? "Anônimo" : nome,
-          valor,
-          mensagem,
-          anonimo
-        };
-      }
-
-      return doacao;
-    });
-
-    salvarDoacoes(doacoesAtualizadas);
-    alert("Doação atualizada com sucesso!");
-  } else {
-    const novaDoacao = {
-      id: gerarId(doacoes),
-      nome: anonimo ? "Anônimo" : nome,
-      valor,
-      mensagem,
-      anonimo,
-      formaPagamento: "PIX Simulado",
-      data: gerarDataAtual(),
-      status: "Registrada"
-    };
-
-    doacoes.push(novaDoacao);
-    salvarDoacoes(doacoes);
-    alert("Doação registrada com sucesso!");
-  }
-
-  limparFormulario();
-  listarDoacoes();
-}
-
-function editarDoacao(id) {
-  if (!usuarioEhAdmin()) {
-    alert("Somente administradores podem editar doações.");
-    return;
-  }
-
-  const doacoes = buscarDoacoes();
-  const doacao = doacoes.find((item) => item.id === id);
-
-  if (!doacao) {
-    alert("Doação não encontrada.");
-    return;
-  }
-
-  doacaoId.value = doacao.id;
-  nomeInput.value = doacao.anonimo ? "" : doacao.nome;
-  valorInput.value = doacao.valor;
-  mensagemInput.value = doacao.mensagem;
-  anonimoInput.checked = doacao.anonimo;
-
-  btnSalvar.textContent = "Salvar alteração";
-  btnCancelar.style.display = "inline-block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function excluirDoacao(id) {
-  if (!usuarioEhAdmin()) {
-    alert("Somente administradores podem excluir doações.");
-    return;
-  }
-
-  const confirmar = confirm("Tem certeza que deseja excluir esta doação?");
-
-  if (!confirmar) {
-    return;
-  }
-
-  const doacoes = buscarDoacoes();
-  const doacoesAtualizadas = doacoes.filter((doacao) => doacao.id !== id);
-
-  salvarDoacoes(doacoesAtualizadas);
-  listarDoacoes();
-}
-
-function limparFormulario() {
-  formDoacao.reset();
-  doacaoId.value = "";
-  btnSalvar.textContent = "Registrar doação";
-  btnCancelar.style.display = "none";
-}
-
-function formatarData(data) {
-  if (!data) {
-    return "";
-  }
-
-  const partes = data.split("-");
-
-  if (partes.length === 3) {
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
-  }
-
-  return data;
+    return String(
+        Math.max(...doacoes.map(d => Number(d.id))) + 1
+    );
 }
 
 function gerarDataAtual() {
-  const hoje = new Date();
-  const ano = hoje.getFullYear();
-  const mes = String(hoje.getMonth() + 1).padStart(2, "0");
-  const dia = String(hoje.getDate()).padStart(2, "0");
 
-  return `${ano}-${mes}-${dia}`;
+    const hoje = new Date();
+
+    return `${hoje.getFullYear()}-${String(
+        hoje.getMonth() + 1
+    ).padStart(2, "0")}-${String(
+        hoje.getDate()
+    ).padStart(2, "0")}`;
+}
+
+function formatarData(data) {
+
+    const p = data.split("-");
+
+    return `${p[2]}/${p[1]}/${p[0]}`;
 }
 
 function formatarMoeda(valor) {
-  return Number(valor).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  });
+
+    return Number(valor).toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
 }
 
-btnCancelar.addEventListener("click", limparFormulario);
-formDoacao.addEventListener("submit", cadastrarDoacao);
+function atualizarResumo(doacoes) {
 
-btnEntrarUsuario.addEventListener("click", function () {
-  definirUsuarioAtual({ nome: "Visitante", nivel: "usuario" });
-  limparFormulario();
-  listarDoacoes();
-});
+    totalDoacoes.textContent = doacoes.length;
 
-btnEntrarAdmin.addEventListener("click", function () {
-  definirUsuarioAtual({ nome: "Equipe Admin", nivel: "admin" });
-  limparFormulario();
-  listarDoacoes();
-});
+    const soma = doacoes.reduce(
+        (t, d) => t + Number(d.valor),
+        0
+    );
 
-iniciarLocalStorage();
-iniciarUsuarioPadrao();
-listarDoacoes();
+    valorTotal.textContent = formatarMoeda(soma);
+}
+
+function listarDoacoes() {
+
+    const doacoes = buscarDoacoes();
+
+    listaDoacoes.innerHTML = "";
+
+    atualizarResumo(doacoes);
+
+    if (doacoes.length === 0) {
+
+        listaDoacoes.innerHTML =
+            "<p>Nenhuma doação registrada.</p>";
+
+        return;
+    }
+
+    doacoes.forEach(d => {
+
+        const div = document.createElement("div");
+
+        div.className = "doacao";
+
+        let acoes = "";
+
+        if (usuarioEhAdmin()) {
+
+            acoes = `
+            <div class="acoes">
+                <button onclick="editarDoacao('${d.id}')">
+                    Editar
+                </button>
+
+                <button class="btn-excluir"
+                onclick="excluirDoacao('${d.id}')">
+                    Excluir
+                </button>
+            </div>
+            `;
+        }
+
+        div.innerHTML = `
+            <div class="doacao-topo">
+
+                <strong>
+                    ${d.anonimo ? "Anônimo" : d.nome}
+                </strong>
+
+                <strong>
+                    ${formatarMoeda(d.valor)}
+                </strong>
+
+            </div>
+
+            <p>${d.mensagem}</p>
+
+            <small>
+
+                ${d.formaPagamento}
+
+                •
+
+                ${formatarData(d.data)}
+
+                •
+
+                ${d.status}
+
+            </small>
+
+            ${acoes}
+        `;
+
+        listaDoacoes.appendChild(div);
+    });
+}
+
+function cadastrarDoacao(e) {
+
+    e.preventDefault();
+
+    const nome = nomeInput.value.trim();
+
+    const valor = Number(valorInput.value);
+
+    const mensagem = mensagemInput.value.trim();
+
+    const anonimo = anonimoInput.checked;
+
+    if (!anonimo && nome === "") {
+
+        alert("Digite seu nome.");
+
+        return;
+    }
+
+    if (valor <= 0) {
+
+        alert("Digite um valor válido.");
+
+        return;
+    }
+
+    if (mensagem === "") {
+
+        alert("Digite uma mensagem.");
+
+        return;
+    }
+
+    const doacoes = buscarDoacoes();
+
+    const id = doacaoId.value;
+
+    if (id) {
+
+        const indice = doacoes.findIndex(
+            d => d.id === id
+        );
+
+        doacoes[indice] = {
+
+            ...doacoes[indice],
+
+            nome: anonimo ? "Anônimo" : nome,
+
+            valor,
+
+            mensagem,
+
+            anonimo
+        };
+
+        alert("Doação atualizada!");
+
+    } else {
+
+        doacoes.push({
+
+            id: gerarId(doacoes),
+
+            nome: anonimo ? "Anônimo" : nome,
+
+            valor,
+
+            mensagem,
+
+            anonimo,
+
+            formaPagamento: "PIX Simulado",
+
+            data: gerarDataAtual(),
+
+            status: "Registrada"
+        });
+
+        alert("Doação registrada!");
+    }
+
+    salvarDoacoes(doacoes);
+
+    formDoacao.reset();
+
+    doacaoId.value = "";
+
+    btnSalvar.textContent = "Registrar doação";
+
+    btnCancelar.style.display = "none";
+
+    listarDoacoes();
+}
+
+function editarDoacao(id) {
+
+    if (!usuarioEhAdmin()) {
+
+        return;
+    }
+
+    const doacoes = buscarDoacoes();
+
+    const doacao = doacoes.find(
+        d => d.id === id
+    );
+
+    if (!doacao) return;
+
+    doacaoId.value = doacao.id;
+
+    nomeInput.value =
+
+        doacao.anonimo
+
+            ? ""
+
+            : doacao.nome;
+
+    valorInput.value = doacao.valor;
+
+    mensagemInput.value = doacao.mensagem;
+
+    anonimoInput.checked = doacao.anonimo;
+
+    btnSalvar.textContent =
+
+        "Salvar alterações";
+
+    btnCancelar.style.display = "block";
+}
+
+function excluirDoacao(id) {
+
+    if (!usuarioEhAdmin()) {
+
+        return;
+    }
+
+    const confirmar = confirm(
+
+        "Deseja excluir esta doação?"
+    );
+
+    if (!confirmar) return;
+
+    let doacoes = buscarDoacoes();
+
+    doacoes = doacoes.filter(
+
+        d => d.id !== id
+    );
+
+    salvarDoacoes(doacoes);
+
+    listarDoacoes();
+}
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    () => {
+
+        formDoacao = document.getElementById("formDoacao");
+
+        doacaoId = document.getElementById("doacaoId");
+
+        nomeInput = document.getElementById("nome");
+
+        valorInput = document.getElementById("valor");
+
+        mensagemInput = document.getElementById("mensagem");
+
+        anonimoInput = document.getElementById("anonimo");
+
+        listaDoacoes = document.getElementById("listaDoacoes");
+
+        btnSalvar = document.getElementById("btnSalvar");
+
+        btnCancelar = document.getElementById("btnCancelar");
+
+        totalDoacoes = document.getElementById("totalDoacoes");
+
+        valorTotal = document.getElementById("valorTotal");
+
+        iniciarLocalStorage();
+
+        iniciarUsuarioPadrao();
+
+        listarDoacoes();
+
+        btnCancelar.style.display = "none";
+
+        formDoacao.addEventListener(
+            "submit",
+            cadastrarDoacao
+        );
+
+        btnCancelar.addEventListener(
+
+            "click",
+
+            () => {
+
+                formDoacao.reset();
+
+                doacaoId.value = "";
+
+                btnSalvar.textContent =
+
+                    "Registrar doação";
+
+                btnCancelar.style.display =
+
+                    "none";
+            }
+        );
+
+        document.getElementById("btnInicio")
+        ?.addEventListener("click", () => {
+
+            window.location.href = "home.html";
+        });
+
+        document.getElementById("btnMural")
+        ?.addEventListener("click", () => {
+
+            window.location.href = "mural.html";
+        });
+
+    }
+
+);

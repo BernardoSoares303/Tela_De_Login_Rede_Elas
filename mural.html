@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mural de Apoio - Rede Elas</title>
+  <link rel="stylesheet" href="assets/css/mural.css">
+</head>
+
+<body>
+  <header class="mural-header">
+
+    <div class="mural-header__logo">
+
+      <div class="mural-header__logo-image"></div>
+
+      <h1 class="mural-header__logo-title">
+        Rede Elas
+      </h1>
+
+    </div>
+
+    <nav class="mural-header__nav">
+
+      <button class="mural-header__button" id="btnInicio">
+        Início
+      </button>
+
+      <button class="mural-header__button mural-header__button--active" id="btnMural">
+        Mural
+      </button>
+
+      <button class="mural-header__button" id="btnAjuda">
+        Ajuda & Denúncia
+      </button>
+
+      <button class="mural-header__button" id="btnDoacoes">
+        Doações
+      </button>
+
+    </nav>
+
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h1>Mural de Apoio</h1>
+      
+      <p class="subtitulo">Espaço visual com mensagens de acolhimento, orientação e apoio para mulheres que acessam a
+        plataforma.</p>
+
+      <section class="aviso-ajuda">
+        <h2>Você não está sozinha</h2>
+        <p>Em caso de violência contra a mulher, procure apoio. Ligue <strong>180</strong> para orientação ou
+          <strong>190</strong> em situação de emergência.</p>
+      </section>
+
+      <section id="areaFormulario" class="area-formulario">
+        <h2>Criar post-it no mural</h2>
+        <p class="texto-permissao-form">Esta área é exibida apenas para administradores, pois o mural funciona como um
+          espaço moderado.</p>
+        <form id="formPostit" class="formulario">
+          <input type="hidden" id="postitId">
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" maxlength="60" placeholder="Ex: Mensagem de apoio">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" maxlength="280" placeholder="Escreva uma mensagem curta para o mural..."></textarea>
+          <small><span id="contador">0</span>/280 caracteres</small>
+          <div class="linha-campos">
+            <div><label for="categoria">Categoria</label><select id="categoria">
+                <option value="Apoio">Apoio</option>
+                <option value="Orientação">Orientação</option>
+                <option value="Superação">Superação</option>
+                <option value="Informativo">Informativo</option>
+              </select></div>
+            <div><label for="cor">Cor do post-it</label><select id="cor">
+                <option value="rosa">Rosa</option>
+                <option value="lilas">Lilás</option>
+                <option value="amarelo">Amarelo</option>
+                <option value="verde">Verde</option>
+                <option value="azul">Azul</option>
+              </select></div>
+          </div>
+          <div class="botoes-form"><button type="submit" id="btnSalvar">Publicar post-it</button><button type="button"
+              id="btnCancelar" class="btn-cancelar">Cancelar edição</button></div>
+        </form>
+      </section>
+
+      <section class="cabecalho-mural">
+        <div>
+          <h2>Post-its publicados</h2>
+          <p class="subtitulo-menor">Mensagens salvas no navegador usando localStorage.</p>
+        </div>
+        <div class="filtros"><input type="text" id="pesquisa" placeholder="Pesquisar no mural..."><select
+            id="filtroCategoria">
+            <option value="Todas">Todas</option>
+            <option value="Apoio">Apoio</option>
+            <option value="Orientação">Orientação</option>
+            <option value="Superação">Superação</option>
+            <option value="Informativo">Informativo</option>
+          </select></div>
+      </section>
+
+      <section class="resumo">
+        <div><span id="totalPostits">0</span>
+          <p>post-its publicados</p>
+        </div>
+        <div><span id="totalFixados">0</span>
+          <p>post-its fixados</p>
+        </div>
+      </section>
+      <div id="listaPostits" class="mural-board"></div>
+    </section>
+  </main>
+  <script src="assets/js/mural.js"></script>
+</body>
+
+</html>
