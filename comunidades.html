@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rede Elas – Comunidades</title>
+  <link rel="stylesheet" href="./assets/css/comunidades.css" />
+</head>
+
+<body>
+
+  <header class="mural-header">
+
+    <div class="mural-header__logo">
+
+      <div class="mural-header__logo-image"></div>
+
+      <h1 class="mural-header__logo-title">
+        Rede Elas
+      </h1>
+
+    </div>
+
+    <nav class="mural-header__nav">
+
+      <button class="mural-header__button" id="btn-inicio">
+        Início
+      </button>
+
+      <button class="mural-header__button" id="btnMural">
+        Mural
+      </button>
+
+      <button class="mural-header__button" id="btnAjuda">
+        Ajuda & Denúncia
+      </button>
+
+      <button class="mural-header__button" id="btnDoacoes">
+        Doações
+      </button>
+
+      <div class="admin-menu" id="adminMenu" style="display: none;">
+
+        <button class="mural-header__button" id="Painel__adm">
+          Painel Admin
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        <div class="admin-menu__dropdown" id="adminDropdown">
+
+          <button class="admin-menu__item" id="btnUsuarios">
+            Controle de Usuários
+          </button>
+
+          <button class="admin-menu__item" id="btnDenuncias">
+            Controle de Denúncias
+          </button>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+    <button class="mural-header__logout" id="Logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+
+  </header>
+
+  <main class="main-content">
+    <div class="page-header page-header-flex">
+      <div>
+        <h1 class="page-title">Comunidades</h1>
+        <p class="page-subtitle">Encontre sua rede de apoio</p>
+      </div>
+
+      <button class="btn-add-community" id="openCadastroModal" aria-label="Cadastrar comunidade"
+        title="Cadastrar comunidade">
+        +
+      </button>
+    </div>
+
+    <section class="controls-bar" aria-label="Filtros e busca">
+      <div class="search-wrapper">
+        <span class="search-icon">🔎</span>
+        <input id="searchInput" class="search-input" type="text" placeholder="Buscar por nome ou descrição..."
+          aria-label="Buscar comunidades" />
+        <button id="clearSearch" class="search-clear" aria-label="Limpar busca">✕</button>
+      </div>
+
+      <div class="filter-sort-group">
+        <select id="filterCategoria" class="control-select" aria-label="Filtrar por categoria">
+          <option value="">Todas categorias</option>
+          <option value="Apoio Emocional">Apoio Emocional</option>
+          <option value="Jurídico">Jurídico</option>
+          <option value="Saúde">Saúde</option>
+          <option value="Superação">Superação</option>
+        </select>
+
+        <select id="sortBy" class="control-select" aria-label="Ordenar comunidades">
+          <option value="nome_asc">Nome (A-Z)</option>
+          <option value="nome_desc">Nome (Z-A)</option>
+          <option value="membros_desc">Mais membros</option>
+          <option value="membros_asc">Menos membros</option>
+          <option value="data_desc">Mais recentes</option>
+          <option value="data_asc">Mais antigas</option>
+        </select>
+
+        <button id="clearFiltersBtn" class="btn-retry" type="button">Limpar</button>
+      </div>
+    </section>
+
+    <p class="results-count" id="resultsCount"></p>
+
+    <div class="loading-state" id="loadingState">
+      <div class="spinner"></div>
+      <p>Carregando comunidades...</p>
+    </div>
+
+    <div class="error-state hidden" id="errorState">
+      <span class="error-icon">⚠️</span>
+      <p id="errorMessage">Não foi possível carregar as comunidades.</p>
+      <button class="btn-retry" id="retryBtn">Tentar novamente</button>
+    </div>
+
+    <div class="comunidades-grid" id="comunidadesGrid" aria-label="Lista de comunidades"></div>
+
+    <div class="empty-state hidden" id="emptyState">
+      <span class="empty-icon">🔎</span>
+      <p>Nenhuma comunidade encontrada.</p>
+    </div>
+  </main>
+
+  <!-- Modal visualizar comunidade -->
+  <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+      <div class="modal-emoji" id="modalEmoji"></div>
+      <span class="modal-categoria" id="modalCategoria"></span>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <p class="modal-descricao" id="modalDescricao"></p>
+      <div class="modal-meta">
+        <div class="meta-item">
+          <span class="meta-label">Membros</span>
+          <span class="meta-value" id="modalMembros"></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Desde</span>
+          <span class="meta-value" id="modalData"></span>
+        </div>
+      </div>
+      <div class="modal-posts">
+        <span class="meta-label">Mensagens</span>
+        <span class="meta-value" id="modalMessagesCount"></span>
+        <div class="modal-post-list" id="modalPostList"></div>
+      </div>
+      <button class="btn-entrar" id="btnEntrar">Entrar na Comunidade</button>
+      <button class="btn-entrar btn-secondary" id="btnCriarPost">Criar postagem</button>
+      <p class="modal-aviso">Este é um espaço seguro e moderado. 💜</p>
+    </div>
+  </div>
+
+  <!-- Modal cadastro -->
+  <div class="modal-overlay hidden" id="cadastroModalOverlay" role="dialog" aria-modal="true"
+    aria-labelledby="cadastroModalTitle">
+    <div class="modal-card modal-card-cadastro">
+      <button class="modal-close" id="cadastroModalClose" aria-label="Fechar">✕</button>
+
+      <h2 class="modal-title" id="cadastroModalTitle">Cadastrar Comunidade</h2>
+      <p class="modal-descricao cadastro-descricao">
+        Preencha os campos abaixo para criar uma nova comunidade.
+      </p>
+
+      <form id="cadastroComunidadeForm" class="cadastro-form">
+        <label class="form-label" for="nomeComunidade">Nome da comunidade</label>
+        <input type="text" id="nomeComunidade" class="form-input" placeholder="Digite o nome da comunidade..."
+          maxlength="60" required />
+
+        <label class="form-label" for="descricaoComunidade">Descrição da comunidade</label>
+        <textarea id="descricaoComunidade" class="form-textarea" placeholder="Digite a descrição da comunidade..."
+          maxlength="220" required></textarea>
+
+        <label class="form-label" for="categoriaComunidade">Categoria</label>
+        <select id="categoriaComunidade" class="form-input" required>
+          <option value="">Selecione uma categoria</option>
+          <option value="Apoio Emocional">Apoio Emocional</option>
+          <option value="Jurídico">Jurídico</option>
+          <option value="Saúde">Saúde</option>
+          <option value="Superação">Superação</option>
+        </select>
+
+
+        <button type="submit" class="btn-entrar">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="./assets/js/comunidades.js"></script>
+</body>
+
+</html>

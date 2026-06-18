@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .addEventListener("click", () => {
             window.location.href = "mural.html";
         });
+    
+    document.getElementById("btn-comunidades")
+        .addEventListener("click", () => {
+            window.location.href = "comunidades.html";
+        });
         
     // LOGOUT
     const logoutBtn = document.getElementById("Logout");
