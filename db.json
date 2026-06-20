@@ -19,5 +19,28 @@
       "id": "bLvJrFOGQ_I"
     }
   ],
+  "postagens": [
+    {
+      "id": 1,
+      "titulo": "Meu namorado apos uma discussão me pediu desculpas...",
+      "conteudo": "Meu namorado apos uma discussão me pediu desculpas, e mudou após o ocorrido, não aceitem menos que isso!",
+      "usuarioId": "W0Ho0AM2ZRw",
+      "comunidadeId": 1,
+      "anonimo": true,
+      "status": "aprovado",
+      "dataCriacao": "2026-06-15"
+    },
+    {
+      "id": 2,
+      "titulo": "Ontem meu chefe me assediou no trabalho...",
+      "conteudo": "Ontem meu chefe me assediou no trabalho, ele me chamou para uma reunião e fez comentários inapropriados sobre minha aparência. Me senti muito desconfortável e não sei o que fazer.",
+      "usuarioId": "bLvJrFOGQ_I",
+      "comunidadeId": 1,
+      "anonimo": true,
+      "status": "aprovado",
+      "dataCriacao": "2026-06-14"
+    }
+  ],
+  "avaliacoes": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
