@@ -571,6 +571,14 @@ body {
 
 /* VOTAÇÃO ATIVA */
 
+.relato-card__vote--up {
+    color: #6f6f6f;
+}
+
+.relato-card__vote--down {
+    color: #6f6f6f;
+}
+
 .relato-card__vote--ativo {
     font-weight: bold;
 }

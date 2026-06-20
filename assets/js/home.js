@@ -64,7 +64,7 @@ function renderizarFeed(postagens, avaliacoes) {
         const downvotes = avaliacoes.filter(v => v.postagemId.toString() === post.id.toString() && v.tipoVoto === 'downvote').length;
         const totalVotos = upvotes - downvotes;
 
-        const meuVoto = avaliacoes.find(v => v.postagemId.toString() === post.id.toString() && v.usuarioId.toString() === usuario.id.toString());
+        const meuVoto = usuario ? avaliacoes.find(v => v.postagemId.toString() === post.id.toString() && v.usuarioId.toString() === usuario.id.toString()) : null;
         const tipoMeuVoto = meuVoto ? meuVoto.tipoVoto : null;
 
         const card = document.createElement('div');
@@ -101,6 +101,11 @@ function renderizarFeed(postagens, avaliacoes) {
 
 // Função para gerenciar votos
 async function gerenciarVoto(postId, tipo) {
+    if (!usuario) {
+        alert('Você precisa estar logado para votar');
+        return;
+    }
+
     const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes')) || [];
 
     const votosExistentes = avaliacoes.filter(v => 
@@ -148,6 +153,11 @@ async function gerenciarVoto(postId, tipo) {
 
 // Função para criar postagem
 async function criarPostagem(conteudo) {
+    if (!usuario) {
+        alert('Você precisa estar logado para criar uma postagem');
+        return;
+    }
+
     const texto = conteudo.trim();
     if (!texto) {
         alert('Digite uma postagem');
@@ -297,6 +307,10 @@ function fecharModalDenuncia() {
 
 // Função para criar denúncia
 function criarDenuncia() {
+    if (!usuario) {
+        alert('Você precisa estar logado para criar uma denúncia');
+        return;
+    }
 
     // pega textarea do modal
 
