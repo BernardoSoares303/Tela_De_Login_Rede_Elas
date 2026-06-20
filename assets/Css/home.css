@@ -569,6 +569,30 @@ body {
     display: none;
 }
 
+/* VOTAÇÃO ATIVA */
+
+.relato-card__vote--up {
+    color: #6f6f6f;
+}
+
+.relato-card__vote--down {
+    color: #6f6f6f;
+}
+
+.relato-card__vote--ativo {
+    font-weight: bold;
+}
+
+.relato-card__vote--up.relato-card__vote--ativo {
+    color: #2ecc71 !important;
+    transform: scale(1.15);
+}
+
+.relato-card__vote--down.relato-card__vote--ativo {
+    color: #e74c3c !important;
+    transform: scale(1.15);
+}
+
 /* Responsividade */
 
 /* Tablets */

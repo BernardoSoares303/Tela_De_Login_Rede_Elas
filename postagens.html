@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rede Elas – Postagens</title>
+  <link rel="stylesheet" href="./assets/css/comunidades.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+  <header class="mural-header">
+
+    <div class="mural-header__logo">
+
+      <div class="mural-header__logo-image"></div>
+
+      <h1 class="mural-header__logo-title">
+        Rede Elas
+      </h1>
+
+    </div>
+
+    <nav class="mural-header__nav">
+
+      <button class="mural-header__button" id="btn-comunidades">
+        Comunidades
+      </button>
+
+      <button class="mural-header__button mural-header__button--active" id="btnPostagens">
+        Postagens
+      </button>
+
+    </nav>
+
+    <button class="mural-header__logout" id="Logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </button>
+
+  </header>
+
+  <main class="main-content">
+    <div class="page-header page-header-flex">
+      <div>
+        <h1 class="page-title">Postagens</h1>
+        <p class="page-subtitle" id="pageSubtitle">Crie e veja postagens da comunidade</p>
+      </div>
+      <button class="btn-add-community" id="btnVoltar" title="Voltar para comunidades" aria-label="Voltar">
+        ←
+      </button>
+    </div>
+
+    <section class="postagens-page" aria-label="Área de postagens">
+      <form id="postForm" class="post-form">
+        <label class="form-label" for="postText">Escreva sua postagem</label>
+        <textarea id="postText" class="form-textarea" placeholder="Digite sua mensagem..." required></textarea>
+        <button type="submit" class="btn-entrar">Postar</button>
+      </form>
+
+      <div class="postagem-info">
+        <p id="communityInfo">Comunidade: —</p>
+        <p id="postsCount">0 postagens</p>
+      </div>
+
+      <div class="post-list" id="postList"></div>
+    </section>
+  </main>
+
+  <div class="toast hidden" id="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="./assets/js/postagens.js"></script>
+</body>
+
+</html>
