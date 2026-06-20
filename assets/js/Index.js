@@ -1,21 +1,8 @@
-function IrTelaCadastro() {
-    window.location.href = "cadastro.html";
-}
+const linksMenu = document.querySelectorAll("nav a[href^='#']");
 
-function IrTelaLogin() {
-    window.location.href = "login.html";
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    // EventListener Do botão de Fazer Cadastro
-    const cadastro = document.querySelector("#CriarConta");
-    cadastro.addEventListener("click", (e) => {
-        IrTelaCadastro();
-    })
-
-    // EventListener Do botão de Fazer Login
-    const login = document.querySelector("#Login");
-    login.addEventListener("click", (e) => {
-        IrTelaLogin();
-    })
-})
+linksMenu.forEach((link) => {
+  link.addEventListener("click", function () {
+    linksMenu.forEach((item) => item.classList.remove("ativo"));
+    this.classList.add("ativo");
+  });
+});
